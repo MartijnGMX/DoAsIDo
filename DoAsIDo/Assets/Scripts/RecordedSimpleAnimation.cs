@@ -4,14 +4,20 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName="RecordedSimpleAnimation", menuName= "RecordedSimpleAnimation")]   
 public class RecordedSimpleAnimation : ScriptableObject {
-
-    [HideInInspector]
     public List<Vector3> position;
-    [HideInInspector]
+    [SerializeField]
     public List<float> timeStamps;
 
+    public float lengthInSecs
+    {
+        get { return timeStamps.Count > 0 ?
+                timeStamps[timeStamps.Count - 1]
+                : 0 ;
+        }
+    }
+
     // helper
-    int lastIndex;
+    // int lastIndex;
 
     public void Clear()
     {
@@ -28,7 +34,6 @@ public class RecordedSimpleAnimation : ScriptableObject {
     // reset the playhead
     public void Stop()
     {
-        lastIndex = 0;
     }
 
     // find the indices in the arrays that surround a given timeStamp
@@ -37,7 +42,7 @@ public class RecordedSimpleAnimation : ScriptableObject {
     {
         int i = 0;
         int N = timeStamps.Count;
-        while (i < N && timeStamps[i] < time)
+        while (i < N && timeStamps[i] <= time)
         {
             i++;
         }
@@ -86,7 +91,7 @@ public class RecordedSimpleAnimation : ScriptableObject {
     {
         for (int i = 0; i < position.Count - 1; i++) {
             float time = timeStamps[i];
-            Gizmos.color = Color.Lerp(Color.black, Color.white, time - Mathf.Floor(time));
+            Gizmos.color = Color.Lerp(Color.black, Color.white, i % 2); // time - Mathf.Floor(time));
             Gizmos.DrawLine(position[i], position[i + 1]);
         }
     }

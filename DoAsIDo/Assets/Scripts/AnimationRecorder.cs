@@ -53,9 +53,11 @@ public class AnimationRecorder : MonoBehaviour
                 break;
             case MODE.PLAYING:
                 time = Time.time - startTime;
-                if (time - prevTime > 1f / frameRate){
-                    recordingTarget.Play(transformToRecord, time);
-                    prevTime = time;
+                recordingTarget.Play(transformToRecord, time);
+                prevTime = time;
+                if (time > recordingTarget.lengthInSecs)
+                {
+                    stop = true;
                 }
                 break;
             case MODE.RECORDING:
