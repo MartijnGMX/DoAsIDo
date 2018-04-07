@@ -6,6 +6,9 @@ using VRTK;
 public class VRRecorderController : MonoBehaviour
 {
     public AnimationRecorder animRecorder;
+    public GameObject recordingVisualizer;
+    public GameObject playBackVisualizer;
+
 
     public GameObject leftController;
     public GameObject rightController;
@@ -34,19 +37,19 @@ public class VRRecorderController : MonoBehaviour
             rightCEvents = (rightController.GetComponent<VRTK_ControllerEvents>() ? rightController.GetComponent<VRTK_ControllerEvents>() : rightController.GetComponentInParent<VRTK_ControllerEvents>());
             if (leftCEvents != null && rightCEvents != null)
             {
-                rightCEvents.GripClicked += RightCEvents_GripClicked;
-                rightCEvents.StartMenuPressed += RightCEvents_StartMenuPressed;
+                rightCEvents.GripClicked += OnRecordPressed;
+                rightCEvents.ButtonTwoPressed += OnPlayPressed;
                 inited = true;
             }
         }
     }
 
-    private void RightCEvents_StartMenuPressed(object sender, ControllerInteractionEventArgs e)
+    private void OnPlayPressed(object sender, ControllerInteractionEventArgs e)
     {
         PlayPressed();
     }
 
-    private void RightCEvents_GripClicked(object sender, ControllerInteractionEventArgs e)
+    private void OnRecordPressed(object sender, ControllerInteractionEventArgs e)
     {
         RecordPressed();
     }
@@ -55,10 +58,13 @@ public class VRRecorderController : MonoBehaviour
     {
         if (animRecorder.mode == AnimationRecorder.MODE.PLAYING)
         {
+            playBackVisualizer.SetActive(false);
             animRecorder.stop = true;
         }
         else
         {
+            animRecorder.transformToPlayBack = playBackVisualizer.transform;
+            playBackVisualizer.SetActive(true);
             animRecorder.startPlaying = true;
         }
     }
@@ -68,9 +74,18 @@ public class VRRecorderController : MonoBehaviour
         if (animRecorder.mode == AnimationRecorder.MODE.RECORDING)
         {
             animRecorder.stop = true;
+
         }
         else
         {
+            animRecorder.transformToRecord = leftController.transform;
+            animRecorder.recordingTarget.Clear();
+
+            playBackVisualizer.SetActive(false);
+
+            // could do this always? :
+            recordingVisualizer.transform.SetParent(leftController.transform);
+            recordingVisualizer.transform.localPosition = Vector3.zero;
             animRecorder.startRecording = true;
         }
     }

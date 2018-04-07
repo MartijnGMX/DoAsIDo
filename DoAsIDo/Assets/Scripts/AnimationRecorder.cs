@@ -8,6 +8,7 @@ public class AnimationRecorder : MonoBehaviour
     public RecordedSimpleAnimation recordingTarget;
 
     public Transform transformToRecord;
+    public Transform transformToPlayBack;
 
     public float startTime;
     public float time;
@@ -53,7 +54,7 @@ public class AnimationRecorder : MonoBehaviour
                 break;
             case MODE.PLAYING:
                 time = Time.time - startTime;
-                recordingTarget.Play(transformToRecord, time);
+                recordingTarget.Play(transformToPlayBack, time);
                 prevTime = time;
                 if (time > recordingTarget.lengthInSecs)
                 {

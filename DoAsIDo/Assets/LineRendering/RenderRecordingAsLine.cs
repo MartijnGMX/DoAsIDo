@@ -18,7 +18,7 @@ public class RenderRecordingAsLine : MonoBehaviour {
     void Update () {
         // todo: optimize
         Vector3[] pos = animationRecorder.recordingTarget.position.ToArray();
+        lineRenderer.positionCount = pos.Length;
         lineRenderer.SetPositions(pos);
-        lineRenderer.SetVertexCount(pos.Length);
 	}
 }
