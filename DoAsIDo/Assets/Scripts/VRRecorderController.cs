@@ -59,12 +59,14 @@ public class VRRecorderController : MonoBehaviour
         if (animRecorder.mode == AnimationRecorder.MODE.PLAYING)
         {
             playBackVisualizer.SetActive(false);
+            recordingVisualizer.SetActive(false);
             animRecorder.stop = true;
         }
         else
         {
             animRecorder.transformToPlayBack = playBackVisualizer.transform;
             playBackVisualizer.SetActive(true);
+            recordingVisualizer.SetActive(true);
             animRecorder.startPlaying = true;
         }
     }
@@ -73,8 +75,8 @@ public class VRRecorderController : MonoBehaviour
     {
         if (animRecorder.mode == AnimationRecorder.MODE.RECORDING)
         {
+            recordingVisualizer.SetActive(false);
             animRecorder.stop = true;
-
         }
         else
         {
@@ -86,6 +88,7 @@ public class VRRecorderController : MonoBehaviour
             // could do this always? :
             recordingVisualizer.transform.SetParent(leftController.transform);
             recordingVisualizer.transform.localPosition = Vector3.zero;
+            recordingVisualizer.SetActive(true);
             animRecorder.startRecording = true;
         }
     }
