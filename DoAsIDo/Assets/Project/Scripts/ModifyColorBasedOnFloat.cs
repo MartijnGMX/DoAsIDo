@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ModifyColorBasedOnScore : MonoBehaviour {
-    public ProximityScore score;
+public class ModifyColorBasedOnFloat: FloatListener_Curved {
     public Material material;
 
-    public Color score0color;
-    public Color score1color;
+    public Color colorAt0;
+    public Color colorAt1;
     public Color lerpedColor;
 
     public string ColorName = "_TintColor"; // name of the shader property to adjust
@@ -19,13 +18,11 @@ public class ModifyColorBasedOnScore : MonoBehaviour {
             material = GetComponent<Renderer>().material;
         }	
 	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (score)
-        {
-            lerpedColor = Color.Lerp(score0color, score1color, score.score);
-            material.SetColor(ColorName, lerpedColor);
-        }
-	}
+
+    protected override void OnValueChanged(float value)
+    {
+        base.OnValueChanged(value);
+        lerpedColor = Color.Lerp(colorAt0, colorAt1, outPutAfterCurve);
+        material.SetColor(ColorName, lerpedColor);
+    }
 }
