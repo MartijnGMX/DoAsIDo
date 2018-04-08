@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f198b604c14f19545868e98e11e618dc, type: 3}
   m_Name: ProximityScoreComputer_PosOnly
   m_EditorClassIdentifier: 
-  dist_inner: 0.045
-  dist_outer: 0.165
+  dist_inner: 0.05
+  dist_outer: 0.25
