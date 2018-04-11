@@ -21,7 +21,9 @@ public class PlaybackPreviewVisualizer : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         myTime = index * previewInterval;
-        previewer = Instantiate(playbackVisualizerToClone, this.transform).transform;
+        GameObject newGO = Instantiate(playbackVisualizerToClone, this.transform);
+        newGO.SetActive(true);
+        previewer = newGO.transform;
 
         recorder.OnStartPlaying += OnStartPlay;
         recorder.OnStop += OnStop;
