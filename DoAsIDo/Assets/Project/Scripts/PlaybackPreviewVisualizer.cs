@@ -19,7 +19,7 @@ public class PlaybackPreviewVisualizer : MonoBehaviour {
     public float lerpVal;
 
 	// Use this for initialization
-	void Awake () {
+	void Start () {
         myTime = index * previewInterval;
         previewer = Instantiate(playbackVisualizerToClone, this.transform).transform;
 

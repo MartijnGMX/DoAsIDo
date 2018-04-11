@@ -15,7 +15,7 @@ public class VRRecorderGlobalController : MonoBehaviour
     
     public bool inited;
 
-    public float playbackSpeed = 1f;
+    public FloatValue playBackSpeed;
 
     // Use this for initialization
     void Start()
@@ -73,7 +73,7 @@ public class VRRecorderGlobalController : MonoBehaviour
     {
         if (inited)
         {
-          
+            
         }
         else
         {

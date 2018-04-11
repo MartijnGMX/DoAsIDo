@@ -18,7 +18,8 @@ public class AnimationRecorder : MonoBehaviour
     public bool startRecording = false;
     public bool startPlaying = false;
     public bool stop = false;
-    
+
+    public FloatValue playBackSpeed;
 
     public bool clear = false;
     public bool cleanup = false;
@@ -59,7 +60,7 @@ public class AnimationRecorder : MonoBehaviour
             case MODE.STOPPED:
                 break;
             case MODE.PLAYING:
-                time = Time.time - startTime;
+                time += Time.deltaTime * playBackSpeed.Value;
                 recordingTarget.Play(transformToPlayBack, time);
                 prevTime = time;
                 if (time > recordingTarget.lengthInSecs)
