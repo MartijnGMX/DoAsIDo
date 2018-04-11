@@ -8,8 +8,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab882931059bede42a348635a8acdfef, type: 3}
-  m_Name: RecordedSimpleAnimation
+  m_Script: {fileID: 11500000, guid: 15f261b2b860e1743ae942b9a482896d, type: 3}
+  m_Name: ScoreR1
   m_EditorClassIdentifier: 
-  position: []
-  timeStamps: []
+  displayName: Score in 0..1 of the right hand
+  applyDefaultOnStartup: 1
+  modStep: 0.05
+  defaultValue: 0
+  useLimits: 1
+  minValue: 0
+  maxValue: 1

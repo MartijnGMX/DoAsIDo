@@ -62,13 +62,26 @@ public class RecordedSimpleAnimation : ScriptableObject {
 
     public void Play(Transform trans, float time)
     {
+        if (position.Count > 0)
+        {
+            trans.position = GetInterpolatedPosition(time);
+        } else {
+            Debug.LogWarning("RecordedSimpleAnimation.Play: no positions in array!");
+        }
+    }
+
+    public Vector3 GetInterpolatedPosition(float time)
+    {
         int a;
         int b;
         float t;
         if (position.Count > 0)
         {
             GetIndices(time, out a, out b, out t);
-            trans.position = Vector3.Lerp(position[a], position[b], t); // linearly interpolate
+            return Vector3.Lerp(position[a], position[b], t); // linearly interpolate
+        } else {
+            Debug.LogWarning("RecordedSimpleAnimation.GetInterpolatedPosition: no positions in array!");
+            return Vector3.zero;
         }
     }
 

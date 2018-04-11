@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15f261b2b860e1743ae942b9a482896d, type: 3}
-  m_Name: ScoreLeft
+  m_Name: ScoreL1
   m_EditorClassIdentifier: 
   displayName: Score in 0..1 of the left hand
   applyDefaultOnStartup: 1

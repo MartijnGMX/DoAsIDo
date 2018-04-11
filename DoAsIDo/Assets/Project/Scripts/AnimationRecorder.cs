@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AnimationRecorder : MonoBehaviour
 {
@@ -28,6 +29,11 @@ public class AnimationRecorder : MonoBehaviour
 
     public int numSamples = 0;
     public bool showGizmo = true;
+
+    public delegate void RecorderEvent();
+    public RecorderEvent OnStartPlaying;
+    public RecorderEvent OnStartRecording;
+    public RecorderEvent OnStop;
 
     public enum MODE
     {
@@ -79,6 +85,9 @@ public class AnimationRecorder : MonoBehaviour
     {
         time = 0f;
         mode = MODE.STOPPED;
+        if (OnStop != null) {
+            OnStop.Invoke();
+        }
     }
 
     void StartPlaying()
@@ -87,6 +96,9 @@ public class AnimationRecorder : MonoBehaviour
         time = 0f;
         prevTime = -9999f;
         mode = MODE.PLAYING;
+        if (OnStartPlaying!=null){
+            OnStartPlaying.Invoke();
+        }
     }
 
     void StartRecording()
@@ -95,6 +107,9 @@ public class AnimationRecorder : MonoBehaviour
         time = 0f;
         prevTime = -9999f;
         mode = MODE.RECORDING;
+        if (OnStartRecording != null) {
+            OnStartRecording.Invoke();
+        }
     }
 
     void CheckInput()
